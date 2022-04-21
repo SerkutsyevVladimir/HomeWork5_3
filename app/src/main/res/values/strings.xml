@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HomeWork3</string>
+    <string name="fragment_list_toolbar_title_text">List of Github users</string>
+    <string name="fragment_details_toolbar_title_text">Github user details</string>
+    <string name="fragment_details_username_title">Username:</string>
+    <string name="fragment_details_followers_title_text">Followers:</string>
+    <string name="fragment_details_following_title_text">Following:</string>
+</resources>

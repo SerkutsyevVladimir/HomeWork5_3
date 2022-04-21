@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/fragment_details_toolbar_title_text"
+        android:background="@color/teal_200"
+        app:navigationIcon="?attr/homeAsUpIndicator"/>
+
+    <ImageView
+        android:id="@+id/image_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_margin="@dimen/fragment_details_image_view_layout_margin"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/fragment_details_username_title_text_size"
+        android:padding="@dimen/fragment_details_username_title_padding"
+        android:gravity="center"
+        android:text="@string/fragment_details_username_title"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/fragment_details_username_text_size"
+        android:padding="@dimen/fragment_details_username_padding"
+        android:gravity="center"
+        tools:text="some text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="@dimen/fragment_details_followers_title_text_size"
+            android:padding="@dimen/fragment_details_followers_title_padding"
+            android:gravity="center"
+            android:text="@string/fragment_details_followers_title_text"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="@dimen/fragment_details_following_title_text_size"
+            android:padding="@dimen/fragment_details_following_title_padding"
+            android:gravity="center"
+            android:text="@string/fragment_details_following_title_text"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="@dimen/fragment_details_followers_text_size"
+            android:padding="@dimen/fragment_details_followers_padding"
+            android:gravity="center"
+            tools:text="7532"
+            />
+
+        <TextView
+            android:id="@+id/following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textSize="@dimen/fragment_details_following_text_size"
+            android:padding="@dimen/fragment_details_following_padding"
+            android:gravity="center"
+            tools:text="5555"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

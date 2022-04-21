@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recycler_view_padding">16dp</dimen>
+    <dimen name="item_user_space_size">50</dimen>
+    <dimen name="item_user_card_height">100dp</dimen>
+    <dimen name="item_user_text_size">20sp</dimen>
+    <dimen name="item_user_text_padding">20dp</dimen>
+    <dimen name="item_user_margin_end">20dp</dimen>
+    <dimen name="item_user_card_view_content_padding">16dp</dimen>
+    <dimen name="item_loading_frame_layout_padding">16dp</dimen>
+    <dimen name="fragment_details_image_view_layout_margin">20dp</dimen>
+    <dimen name="fragment_details_username_title_text_size">30sp</dimen>
+    <dimen name="fragment_details_username_title_padding">10dp</dimen>
+    <dimen name="fragment_details_username_text_size">20sp</dimen>
+    <dimen name="fragment_details_username_padding">15dp</dimen>
+    <dimen name="fragment_details_followers_title_padding">15dp</dimen>
+    <dimen name="fragment_details_following_title_padding">15dp</dimen>
+    <dimen name="fragment_details_followers_title_text_size">20sp</dimen>
+    <dimen name="fragment_details_following_title_text_size">20sp</dimen>
+    <dimen name="fragment_details_followers_text_size">20sp</dimen>
+    <dimen name="fragment_details_followers_padding">15dp</dimen>
+    <dimen name="fragment_details_following_text_size">20sp</dimen>
+    <dimen name="fragment_details_following_padding">15dp</dimen>
+</resources>
