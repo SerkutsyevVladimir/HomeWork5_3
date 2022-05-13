@@ -17,7 +17,7 @@
     <ImageView
         android:id="@+id/image_details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="325dp"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_background"
         android:layout_margin="@dimen/fragment_details_image_view_layout_margin"
@@ -93,5 +93,11 @@
             />
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/button_add_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add to Favorites"
+        android:textSize="15sp" />
 </LinearLayout>

@@ -14,6 +14,10 @@
             android:id="@+id/to_details"
             app:destination="@id/details"/>
 
+        <action
+            android:id="@+id/to_favorites"
+            app:destination="@+id/favorite_users"/>
+
     </fragment>
 
     <fragment
@@ -25,6 +29,12 @@
             android:name="username"
             app:argType="string"/>
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/favorite_users"
+        android:name="com.example.homework3.fragments.FavoritesListFragment"
+        tools:layout="@layout/fragment_details">
     </fragment>
 
 

@@ -12,24 +12,16 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/fragment_list_toolbar_title_text"
-        android:background="@color/teal_200"/>
-
-
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/swipe_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        app:title="Favorites"
+        android:background="@color/teal_200"
+        app:navigationIcon="?attr/homeAsUpIndicator"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/recycler_view_padding"
+        android:padding="16dp"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_user"
+        tools:listitem="5"
         tools:itemCount="5"/>
-
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 </LinearLayout>

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -56,6 +57,21 @@ dependencies {
 
     //swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    def roomVersion = "2.4.1"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    //Room Database
+
+    def coroutinesLifecycleVersion = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$coroutinesLifecycleVersion"
+
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    //Coroutines
+
+    implementation 'androidx.room:room-ktx:2.2.1'
+    kapt "androidx.room:room-compiler:2.2.1"
 
 
     testImplementation 'junit:junit:4.13.2'

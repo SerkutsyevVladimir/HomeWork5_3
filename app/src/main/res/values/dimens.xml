@@ -19,6 +19,6 @@
     <dimen name="fragment_details_following_title_text_size">20sp</dimen>
     <dimen name="fragment_details_followers_text_size">20sp</dimen>
     <dimen name="fragment_details_followers_padding">15dp</dimen>
-    <dimen name="fragment_details_following_text_size">20sp</dimen>
+    <dimen name="fragment_details_following_text_size">15sp</dimen>
     <dimen name="fragment_details_following_padding">15dp</dimen>
 </resources>

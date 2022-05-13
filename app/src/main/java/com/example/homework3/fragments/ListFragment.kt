@@ -1,22 +1,21 @@
 package com.example.homework3.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.homework3.R
 import com.example.homework3.adapters.UserAdapter
 import com.example.homework3.databinding.FragmentListBinding
 import com.example.homework3.extensions.addPaginationScrollListener
 import com.example.homework3.extensions.addSpaceDecoration
 import com.example.homework3.retrofit.Item
 import com.example.homework3.retrofit.RetrofitService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
@@ -30,7 +29,11 @@ class ListFragment : Fragment() {
 
     private var lastId = 0
 
-    private var currentCall: Call<List<Item.GithubUser>>? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true);
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,55 +67,39 @@ class ListFragment : Fragment() {
             recyclerView.addSpaceDecoration(SPACE_SIZE)
 
             recyclerView.addPaginationScrollListener(layoutManager, 15) {
-                if (currentCall == null) {
 
-                    currentCall = RetrofitService.provideGithubApi().getUsers(lastId)
-                    currentCall?.enqueue(object : Callback<List<Item.GithubUser>> {
-                        override fun onResponse(
-                            call: Call<List<Item.GithubUser>>,
-                            response: Response<List<Item.GithubUser>>
-                        ) {
-                            if (response.isSuccessful) {
-                                val users = response.body() ?: return
-                                val currentList = adapter.currentList.toList().dropLast(1)
-                                val resultList = currentList
-                                    .plus(users)
-                                    .plus(Item.Loading)
-                                adapter.submitList(resultList)
-                                val resultListWithoutLoading = resultList.dropLast(1)
-                                lastId =
-                                    (resultListWithoutLoading.last() as Item.GithubUser).id.toInt()
-                            } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Uups...Something goes wrong",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-                            currentCall = null
-                        }
-
-                        override fun onFailure(
-                            call: Call<List<Item.GithubUser>>,
-                            t: Throwable
-                        ) {
-                            currentCall = null
-                        }
+                setListofItems()
 
 
-                    })
-                }
+            }
+            toolbar.inflateMenu(R.menu.toolbar_menu)
+            toolbar.setOnMenuItemClickListener {
+                findNavController().navigate(ListFragmentDirections.toFavorites())
+                true
             }
         }
 
-        setListofItems()
+        if (lastId == 0) {
+            setListofItems()
+        }
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.toolbar_menu, menu);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        findNavController().navigate(ListFragmentDirections.toFavorites())
+
+        return super.onOptionsItemSelected(item)
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        currentCall?.cancel()
         _binding = null
     }
 
@@ -121,43 +108,32 @@ class ListFragment : Fragment() {
     }
 
     fun setListofItems() {
-        if (currentCall == null) {
-            if (lastId != 0) {
-                lastId = 0
-                binding.recyclerView.smoothScrollToPosition(0)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val users = RetrofitService.provideGithubApi().getUsers(lastId)
+                if (adapter.currentList.isEmpty()) {
+                    adapter.submitList(users + Item.Loading)
+                    val currentList = adapter.currentList.toList().dropLast(1)
+                    lastId = (currentList.last() as Item.GithubUser).id.toInt()
+                } else {
+                    val currentList = adapter.currentList.toList().dropLast(1)
+                    val resultList = currentList
+                        .plus(users)
+                        .plus(Item.Loading)
+                    adapter.submitList(resultList)
+                    val resultListWithoutLoading = resultList.dropLast(1)
+                    lastId =
+                        (resultListWithoutLoading.last() as Item.GithubUser).id.toInt()
+                }
+                Log.d("HW5 - call to API", "HW5 - call to API")
+            } catch (e: Throwable) {
+                Toast.makeText(
+                    requireContext(),
+                    "Uups...Something goes wrong",
+                    Toast.LENGTH_LONG
+                ).show()
             }
-            currentCall = RetrofitService.provideGithubApi().getUsers(lastId)
-            currentCall?.enqueue(object : Callback<List<Item.GithubUser>> {
-                override fun onResponse(
-                    call: Call<List<Item.GithubUser>>,
-                    response: Response<List<Item.GithubUser>>
-                ) {
-                    if (response.isSuccessful) {
-                        val users = response.body() ?: return
-                        adapter.submitList(users + Item.Loading)
-                        val currentList = adapter.currentList.toList().dropLast(1)
-                        lastId = (currentList.last() as Item.GithubUser).id.toInt()
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Uups...Something goes wrong",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                    currentCall = null
-                }
-
-                override fun onFailure(call: Call<List<Item.GithubUser>>, t: Throwable) {
-                    currentCall = null
-                    Toast.makeText(
-                        requireContext(),
-                        "Uups...Something goes wrong",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-
-            })
         }
     }
 

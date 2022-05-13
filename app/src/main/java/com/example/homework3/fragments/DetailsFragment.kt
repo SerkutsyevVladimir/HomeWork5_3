@@ -6,19 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.example.homework3.appDatabase
 import com.example.homework3.databinding.FragmentDetailsBinding
-import com.example.homework3.retrofit.GithubUserDetails
+import com.example.homework3.model.GithubFavoriteUser
 import com.example.homework3.retrofit.RetrofitService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
+
+    private val githubDao by lazy {
+        requireContext().appDatabase.githubDao()
+    }
 
     private val args by navArgs<DetailsFragmentArgs>()
 
@@ -36,38 +40,44 @@ class DetailsFragment : Fragment() {
         with(binding) {
             val username = args.username
             textView.text = username
-            RetrofitService.provideGithubApi().getUserDetails(username)
-                .enqueue(object : Callback<GithubUserDetails> {
-                    override fun onResponse(
-                        call: Call<GithubUserDetails>,
-                        response: Response<GithubUserDetails>
-                    ) {
-                        if (response.isSuccessful) {
-                            val user = response.body()
-                            with(binding) {
-                                followers.text = user?.followers.toString()
-                                following.text = user?.following.toString()
-                                imageDetails.load(user?.avatarUrl)
-                            }
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Uups...Something goes wrong",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
 
-                    override fun onFailure(call: Call<GithubUserDetails>, t: Throwable) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                try {
+                    val user = RetrofitService.provideGithubApi().getUserDetails(username)
+                    with(binding) {
+                        followers.text = user?.followers.toString()
+                        following.text = user?.following.toString()
+                        imageDetails.load(user?.avatarUrl)
+                    }
+                } catch (e: Throwable) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Uups...Something goes wrong",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            buttonAddFavorites.setOnClickListener {
+
+                textView.text?.takeIf { it.isNotEmpty() }
+                    ?.let { username ->
+                       // viewLifecycleOwner.lifecycleScope.launch {
+                        githubDao.insertAll(GithubFavoriteUser(githubUsername = username.toString()))
                         Toast.makeText(
                             requireContext(),
-                            "Uups...Something goes wrong2",
+                            "User successfully added to Favorites",
                             Toast.LENGTH_LONG
                         ).show()
-                    }
+                   // }
+                    }?: run {
+                    Toast.makeText(
+                        requireContext(),
+                        "Something went wrong",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
-
-                )
+            }
 
             toolbar.setOnClickListener { findNavController().popBackStack() }
         }

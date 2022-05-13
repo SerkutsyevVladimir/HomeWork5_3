@@ -7,12 +7,12 @@ import retrofit2.http.Query
 
 interface GithubApi {
     @GET("users")
-    fun getUsers(
+    suspend fun getUsers(
         @Query("since") since: Int
-    ): Call<List<Item.GithubUser>>
+    ): List<Item.GithubUser>
 
     @GET("users/{username}")
-    fun getUserDetails(
+    suspend fun getUserDetails(
         @Path("username") username : String
-    ): Call<GithubUserDetails>
+    ): GithubUserDetails
 }
