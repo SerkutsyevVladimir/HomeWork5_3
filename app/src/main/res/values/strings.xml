@@ -5,4 +5,5 @@
     <string name="fragment_details_username_title">Username:</string>
     <string name="fragment_details_followers_title_text">Followers:</string>
     <string name="fragment_details_following_title_text">Following:</string>
+    <string name="fragment_details_button_add_favorites_text">Add to Favorites</string>
 </resources>

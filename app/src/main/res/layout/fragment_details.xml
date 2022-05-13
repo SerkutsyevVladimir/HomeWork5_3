@@ -98,6 +98,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Add to Favorites"
-        android:textSize="15sp" />
+        android:text="@string/fragment_details_button_add_favorites_text"
+        android:textSize="@dimen/fragment_details_textsize" />
 </LinearLayout>

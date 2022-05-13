@@ -7,7 +7,7 @@ import com.example.homework3.retrofit.Item
 
 class UserViewHolder(
     private val binding: ItemUserBinding,
-     val onUserClicked: (Item.GithubUser) -> Unit
+    val onUserClicked: (Item.GithubUser) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(user: Item.GithubUser) {
         with(binding) {

@@ -37,11 +37,17 @@ class FavoriteUserAdapter(
 
     companion object {
         private val DIFF_UTIL = object : DiffUtil.ItemCallback<GithubFavoriteUser>() {
-            override fun areItemsTheSame(oldItem: GithubFavoriteUser, newItem: GithubFavoriteUser): Boolean {
+            override fun areItemsTheSame(
+                oldItem: GithubFavoriteUser,
+                newItem: GithubFavoriteUser
+            ): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: GithubFavoriteUser, newItem: GithubFavoriteUser): Boolean {
+            override fun areContentsTheSame(
+                oldItem: GithubFavoriteUser,
+                newItem: GithubFavoriteUser
+            ): Boolean {
                 return oldItem == newItem
             }
         }

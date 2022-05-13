@@ -29,11 +29,6 @@ class ListFragment : Fragment() {
 
     private var lastId = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true);
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,19 +77,6 @@ class ListFragment : Fragment() {
         if (lastId == 0) {
             setListofItems()
         }
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.toolbar_menu, menu);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        findNavController().navigate(ListFragmentDirections.toFavorites())
-
-        return super.onOptionsItemSelected(item)
 
     }
 
