@@ -30,7 +30,7 @@
         android:padding="@dimen/fragment_details_username_title_padding"
         android:gravity="center"
         android:text="@string/fragment_details_username_title"
-        android:textColor="@color/black"/>
+        />
 
     <TextView
         android:id="@+id/text_view"
@@ -39,6 +39,7 @@
         android:textSize="@dimen/fragment_details_username_text_size"
         android:padding="@dimen/fragment_details_username_padding"
         android:gravity="center"
+        android:textColor="@color/black"
         tools:text="some text"/>
 
     <LinearLayout
@@ -52,8 +53,7 @@
             android:textSize="@dimen/fragment_details_followers_title_text_size"
             android:padding="@dimen/fragment_details_followers_title_padding"
             android:gravity="center"
-            android:text="@string/fragment_details_followers_title_text"
-            android:textColor="@color/black"/>
+            android:text="@string/fragment_details_followers_title_text" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
             android:padding="@dimen/fragment_details_following_title_padding"
             android:gravity="center"
             android:text="@string/fragment_details_following_title_text"
-            android:textColor="@color/black"/>
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -78,6 +78,7 @@
             android:textSize="@dimen/fragment_details_followers_text_size"
             android:padding="@dimen/fragment_details_followers_padding"
             android:gravity="center"
+            android:textColor="@color/black"
             tools:text="7532"
             />
 
@@ -89,6 +90,7 @@
             android:textSize="@dimen/fragment_details_following_text_size"
             android:padding="@dimen/fragment_details_following_padding"
             android:gravity="center"
+            android:textColor="@color/black"
             tools:text="5555"
             />
     </LinearLayout>

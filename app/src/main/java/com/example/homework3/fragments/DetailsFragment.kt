@@ -62,14 +62,14 @@ class DetailsFragment : Fragment() {
 
                 textView.text?.takeIf { it.isNotEmpty() }
                     ?.let { username ->
-                        // viewLifecycleOwner.lifecycleScope.launch {
+                         viewLifecycleOwner.lifecycleScope.launch {
                         githubDao.insertAll(GithubFavoriteUser(githubUsername = username.toString()))
                         Toast.makeText(
                             requireContext(),
                             "User successfully added to Favorites",
                             Toast.LENGTH_LONG
                         ).show()
-                        // }
+                         }
                     } ?: run {
                     Toast.makeText(
                         requireContext(),

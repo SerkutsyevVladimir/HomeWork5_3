@@ -43,17 +43,13 @@ class FavoritesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(view.context)
-            //     viewLifecycleOwner.lifecycleScope.launch {
-            //       withContext(Dispatchers.IO) {
-            val favoriteUsers = githubDao.getAll().toList()
-
-            recyclerView.adapter = adapter
-            recyclerView.addSpaceDecoration(SPACE_SIZE)
-            adapter.submitList(favoriteUsers)
-
-            toolbar.setOnClickListener { findNavController().popBackStack() }
-            //      }
-            //  }
+            viewLifecycleOwner.lifecycleScope.launch {
+                val favoriteUsers = githubDao.getAll().toList()
+                recyclerView.adapter = adapter
+                recyclerView.addSpaceDecoration(SPACE_SIZE)
+                adapter.submitList(favoriteUsers)
+                toolbar.setOnClickListener { findNavController().popBackStack() }
+            }
         }
     }
 

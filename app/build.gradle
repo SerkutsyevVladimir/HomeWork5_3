@@ -61,6 +61,8 @@ dependencies {
     def roomVersion = "2.4.1"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
     //Room Database
 
     def coroutinesLifecycleVersion = "2.4.0"
@@ -70,8 +72,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
     //Coroutines
 
-    implementation 'androidx.room:room-ktx:2.2.1'
-    kapt "androidx.room:room-compiler:2.2.1"
+
 
 
     testImplementation 'junit:junit:4.13.2'

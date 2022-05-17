@@ -20,8 +20,8 @@ class FavoriteUserViewHolder(
         context.appDatabase.githubDao()
     }
 
-//    private val scope =
-//        CoroutineScope(Dispatchers.Main)
+    private val scope =
+        CoroutineScope(Dispatchers.Main)
 
     fun bind(user: GithubFavoriteUser) {
         binding.textView.text = user.githubUsername
@@ -30,9 +30,9 @@ class FavoriteUserViewHolder(
                 .setTitle("Delete")
                 .setMessage("Are you sure you want to delete this User from Favorites?")
                 .setPositiveButton(android.R.string.ok) { dialog, buttonId ->
-                    // scope.launch {
+                     scope.launch {
                     githubDao.delete(user)
-                    //  }
+                      }
                 }
                 .setNegativeButton(android.R.string.cancel, null)
                 .show()

@@ -9,9 +9,9 @@
     <dimen name="item_user_card_view_content_padding">16dp</dimen>
     <dimen name="item_loading_frame_layout_padding">16dp</dimen>
     <dimen name="fragment_details_image_view_layout_margin">20dp</dimen>
-    <dimen name="fragment_details_username_title_text_size">30sp</dimen>
+    <dimen name="fragment_details_username_title_text_size">20sp</dimen>
     <dimen name="fragment_details_username_title_padding">10dp</dimen>
-    <dimen name="fragment_details_username_text_size">20sp</dimen>
+    <dimen name="fragment_details_username_text_size">30sp</dimen>
     <dimen name="fragment_details_username_padding">15dp</dimen>
     <dimen name="fragment_details_followers_title_padding">15dp</dimen>
     <dimen name="fragment_details_following_title_padding">15dp</dimen>
@@ -19,7 +19,7 @@
     <dimen name="fragment_details_following_title_text_size">20sp</dimen>
     <dimen name="fragment_details_followers_text_size">20sp</dimen>
     <dimen name="fragment_details_followers_padding">15dp</dimen>
-    <dimen name="fragment_details_following_text_size">15sp</dimen>
+    <dimen name="fragment_details_following_text_size">20sp</dimen>
     <dimen name="fragment_details_following_padding">15dp</dimen>
     <dimen name="fragment_favorite_list_recyclerview_padding">16dp</dimen>
     <dimen name="item_favorite_user_textsise">20sp</dimen>
