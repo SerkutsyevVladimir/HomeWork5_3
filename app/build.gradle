@@ -65,6 +65,10 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     //Room Database
 
+    def koinVersion = "3.1.5"
+    implementation "io.insert-koin:koin-android:$koinVersion"
+    //Koin
+
     def coroutinesLifecycleVersion = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$coroutinesLifecycleVersion"
 

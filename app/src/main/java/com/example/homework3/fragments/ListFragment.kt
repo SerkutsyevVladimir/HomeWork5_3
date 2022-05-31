@@ -1,34 +1,58 @@
 package com.example.homework3.fragments
 
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.homework3.R
 import com.example.homework3.adapters.UserAdapter
+import com.example.homework3.database.AppDatabase
 import com.example.homework3.databinding.FragmentListBinding
 import com.example.homework3.extensions.addPaginationScrollListener
 import com.example.homework3.extensions.addSpaceDecoration
 import com.example.homework3.retrofit.Item
-import com.example.homework3.retrofit.RetrofitService
-import kotlinx.coroutines.launch
+import com.example.homework3.retrofit.UserRepository
+import com.example.homework3.viewmodels.ListViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = requireNotNull(_binding)
+
+    private val userRepository by inject<UserRepository>()
+
+    private val appDatabase by inject<AppDatabase>()
+
+    private val viewModel by viewModels<ListViewModel> {
+        object : ViewModelProvider.Factory {
+            @Suppress
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return ListViewModel(
+                    userRepository,
+                    appDatabase.githubCashedDao()
+                ) as T
+            }
+        }
+    }
+
+    // private val viewModel by viewModel<ListViewModel>()
 
     private val adapter by lazy {
         UserAdapter(requireContext()) {
             findNavController().navigate(ListFragmentDirections.toDetails(it.login))
         }
     }
-
-    private var lastId = 0
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,9 +68,22 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            val layoutManager = LinearLayoutManager(view.context)
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = layoutManager
+            recyclerView.addSpaceDecoration(SPACE_SIZE)
+
             swipeLayout.setOnRefreshListener {
 
-                setListofItems()
+                viewModel.onRefresh()
+
+                viewModel
+                    .getData()
+                    .onEach {
+                        adapter.submitList(it + Item.Loading)
+                    }
+                    .launchIn(viewLifecycleOwner.lifecycleScope)
+
 
                 Toast.makeText(
                     requireContext(),
@@ -56,16 +93,11 @@ class ListFragment : Fragment() {
 
                 swipeLayout.isRefreshing = false
             }
-            val layoutManager = LinearLayoutManager(view.context)
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = layoutManager
-            recyclerView.addSpaceDecoration(SPACE_SIZE)
+
 
             recyclerView.addPaginationScrollListener(layoutManager, 15) {
 
-                setListofItems()
-
-
+                viewModel.onLoadMore()
             }
             toolbar.inflateMenu(R.menu.toolbar_menu)
             toolbar.setOnMenuItemClickListener {
@@ -74,9 +106,12 @@ class ListFragment : Fragment() {
             }
         }
 
-        if (lastId == 0) {
-            setListofItems()
-        }
+        viewModel
+            .getData()
+            .onEach {
+                adapter.submitList(it + Item.Loading)
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
 
     }
 
@@ -88,35 +123,4 @@ class ListFragment : Fragment() {
     companion object {
         private const val SPACE_SIZE = 50
     }
-
-    fun setListofItems() {
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            try {
-                val users = RetrofitService.provideGithubApi().getUsers(lastId)
-                if (adapter.currentList.isEmpty()) {
-                    adapter.submitList(users + Item.Loading)
-                    val currentList = adapter.currentList.toList().dropLast(1)
-                    lastId = (currentList.last() as Item.GithubUser).id.toInt()
-                } else {
-                    val currentList = adapter.currentList.toList().dropLast(1)
-                    val resultList = currentList
-                        .plus(users)
-                        .plus(Item.Loading)
-                    adapter.submitList(resultList)
-                    val resultListWithoutLoading = resultList.dropLast(1)
-                    lastId =
-                        (resultListWithoutLoading.last() as Item.GithubUser).id.toInt()
-                }
-                Log.d("HW5 - call to API", "HW5 - call to API")
-            } catch (e: Throwable) {
-                Toast.makeText(
-                    requireContext(),
-                    "Uups...Something goes wrong",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-    }
-
 }
