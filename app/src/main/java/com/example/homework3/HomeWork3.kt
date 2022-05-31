@@ -4,26 +4,26 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.homework3.database.AppDatabase
+import com.example.homework3.koin.databaseModule
+import com.example.homework3.koin.networkModule
+import com.example.homework3.koin.repositoryModule
+import com.example.homework3.koin.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class Homework3 : Application() {
-    private var _database: AppDatabase? = null
-    val database get() = requireNotNull(_database)
 
     override fun onCreate() {
         super.onCreate()
-        _database = Room.databaseBuilder(
-            this,
-            AppDatabase::class.java,
-            "app_database.db"
-        )
-            .allowMainThreadQueries() //this line was deleted when I try to migrate Room to Coroutines
-            .build()
+
+        startKoin {
+            androidContext(this@Homework3)
+            modules(
+                databaseModule,
+                networkModule,
+                repositoryModule,
+                viewModelModule
+            )
+        }
     }
 }
-
-val Context.appDatabase: AppDatabase
-    get() = when {
-        this is Homework3 -> database
-        else -> applicationContext.appDatabase
-    }
-
