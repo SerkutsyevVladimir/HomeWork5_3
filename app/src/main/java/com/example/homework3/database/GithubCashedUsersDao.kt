@@ -1,7 +1,6 @@
 package com.example.homework3.database
 
 import androidx.room.*
-import com.example.homework3.model.GithubCashedUser
 import com.example.homework3.retrofit.Item
 
 @Dao

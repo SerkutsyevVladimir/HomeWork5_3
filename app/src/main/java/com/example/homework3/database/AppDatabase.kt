@@ -2,7 +2,6 @@ package com.example.homework3.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.homework3.model.GithubCashedUser
 import com.example.homework3.model.GithubFavoriteUser
 import com.example.homework3.retrofit.Item
 
