@@ -3,40 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/list">
+    app:startDestination="@id/navigation_home"
+    >
 
     <fragment
-        android:id="@+id/list"
-        android:name="com.example.homework3.fragments.ListFragment"
-        tools:layout="@layout/fragment_list">
-
-        <action
-            android:id="@+id/to_details"
-            app:destination="@id/details"/>
-
-        <action
-            android:id="@+id/to_favorites"
-            app:destination="@+id/favorite_users"/>
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/details"
-        android:name="com.example.homework3.fragments.DetailsFragment"
-        tools:layout="@layout/fragment_details">
-
-        <argument
-            android:name="username"
-            app:argType="string"/>
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/favorite_users"
-        android:name="com.example.homework3.fragments.FavoritesListFragment"
-        tools:layout="@layout/fragment_details">
-    </fragment>
-
-
+        android:id="@+id/navigation_home"
+        android:name="com.example.homework3.fragments.FragmentBottomNavigation"
+        tools:layout="@layout/fragment_bottom_navigation"/>
 
 </navigation>

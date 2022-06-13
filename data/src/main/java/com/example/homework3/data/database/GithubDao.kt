@@ -5,7 +5,7 @@ import com.example.homework3.data.model.FavoriteUserEntity
 
 
 @Dao
-interface GithubDao {
+internal interface GithubDao {
     @Query("SELECT * FROM favoriteuserentity")
     suspend fun getAll(): List<FavoriteUserEntity>
 

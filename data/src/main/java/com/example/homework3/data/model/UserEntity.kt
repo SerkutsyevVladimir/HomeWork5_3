@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class UserEntity (
+internal data class UserEntity (
     @PrimaryKey
     val id: Long,
     val login: String,

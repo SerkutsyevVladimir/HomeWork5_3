@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface GithubApi {
+internal interface GithubApi {
     @GET("users")
     suspend fun getUsers(
         @Query("since") since: Int

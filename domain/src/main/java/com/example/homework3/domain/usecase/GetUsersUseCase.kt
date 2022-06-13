@@ -1,10 +1,13 @@
 package com.example.homework3.domain.usecase
 
-import com.example.homework3.domain.model.User
-import com.example.homework3.domain.repository.UserRepository
+import com.example.homework3.domain.model.Item
+import com.example.homework3.domain.repository.UserLocalRepository
+import com.example.homework3.domain.repository.UserRemoteRepository
 
-class GetUsersUseCase(private val userRepository: UserRepository) {
-    suspend operator fun invoke(lastId: Int): Result<List<User>> {
-        return userRepository.getUsers(lastId)
+class GetUsersUseCase(
+    private val userRemoteRepository: UserRemoteRepository
+    ) {
+        suspend operator fun invoke(lastId: Int): Result<List<Item.User>> {
+        return userRemoteRepository.getUsers(lastId)
     }
 }

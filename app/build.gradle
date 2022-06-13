@@ -68,7 +68,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     //Room Database
 
-    def koinVersion = "3.1.5"
+    def koinVersion = "3.2.0"
     implementation "io.insert-koin:koin-android:$koinVersion"
     //Koin
 
@@ -79,6 +79,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
     //Coroutines
 
+    def nav_version = "2.4.1"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
 
 

@@ -5,8 +5,8 @@ import androidx.room.RoomDatabase
 import com.example.homework3.data.model.FavoriteUserEntity
 import com.example.homework3.data.model.UserEntity
 
-@Database(entities = [FavoriteUserEntity::class, UserEntity::class], version = 3)
-abstract class AppDatabase : RoomDatabase() {
+@Database(entities = [FavoriteUserEntity::class, UserEntity::class], version = 4)
+internal abstract class AppDatabase : RoomDatabase() {
     abstract fun githubDao(): GithubDao
 
     abstract fun githubCashedDao(): GithubCashedUsersDao

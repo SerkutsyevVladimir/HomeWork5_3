@@ -13,34 +13,35 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.example.homework3.database.AppDatabase
 import com.example.homework3.databinding.FragmentDetailsBinding
-import com.example.homework3.model.GithubFavoriteUser
-import com.example.homework3.retrofit.GithubUserDetails
-import com.example.homework3.retrofit.UserRepository
+import com.example.homework3.domain.model.FavoriteUser
+import com.example.homework3.domain.model.UserDetails
+import com.example.homework3.domain.usecase.GetUserDetailsUseCase
+import com.example.homework3.domain.usecase.InsertFavoriteUserUseCase
 import com.example.homework3.viewmodels.DetailsViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
 
-    private val userRepository by inject<UserRepository>()
+    //private val userRepository by inject<UserRepository>()
 
-    private val appDatabase by inject<AppDatabase>()
+    //private val appDatabase by inject<AppDatabase>()
+
+    private val getUserDetailsUseCase by inject<GetUserDetailsUseCase>()
+    private val insertFavoriteUserUseCase by inject<InsertFavoriteUserUseCase>()
 
     private val viewModel by viewModels<DetailsViewModel> {
         object : ViewModelProvider.Factory {
             @Suppress
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return DetailsViewModel(
-                    userRepository,
-                    appDatabase.githubDao()
+                    getUserDetailsUseCase,
+                    insertFavoriteUserUseCase
                 ) as T
             }
         }
@@ -68,7 +69,7 @@ class DetailsFragment : Fragment() {
             textView.text = args.username
 
             try {
-                var user: GithubUserDetails
+                var user: UserDetails
                 viewModel.getUserDetails(args.username)
              //   viewModel2.getDetails
                     .onEach {
@@ -94,7 +95,8 @@ class DetailsFragment : Fragment() {
                 textView.text?.takeIf { it.isNotEmpty() }
                     ?.let { username ->
                         viewLifecycleOwner.lifecycleScope.launch {
-                            viewModel.insertAll(GithubFavoriteUser(githubUsername = username.toString()))
+                          //  viewModel.insertAll(GithubFavoriteUser(githubUsername = username.toString()))
+                            viewModel.insertAll(FavoriteUser(username = username.toString()))
                             Toast.makeText(
                                 requireContext(),
                                 "User successfully added to Favorites",

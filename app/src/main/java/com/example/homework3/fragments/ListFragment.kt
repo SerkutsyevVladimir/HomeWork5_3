@@ -14,33 +14,40 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.homework3.R
 import com.example.homework3.adapters.UserAdapter
-import com.example.homework3.database.AppDatabase
 import com.example.homework3.databinding.FragmentListBinding
+import com.example.homework3.domain.model.Item
+import com.example.homework3.domain.repository.UserRemoteRepository
+import com.example.homework3.domain.usecase.GetUsersLocalUseCase
+import com.example.homework3.domain.usecase.GetUsersUseCase
+import com.example.homework3.domain.usecase.InsertUsersLocalUseCase
 import com.example.homework3.extensions.addPaginationScrollListener
 import com.example.homework3.extensions.addSpaceDecoration
-import com.example.homework3.retrofit.Item
-import com.example.homework3.retrofit.UserRepository
 import com.example.homework3.viewmodels.ListViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val userRepository by inject<UserRepository>()
+    //private val userRepository by inject<UserRemoteRepository>()
 
-    private val appDatabase by inject<AppDatabase>()
+    //private val appDatabase by inject<AppDatabase>()
+
+    private val getUsersUseCase by inject<GetUsersUseCase> ()
+    private val insertUsersLocalUseCase by inject<InsertUsersLocalUseCase> ()
+    private val getUsersLocalUseCase by inject<GetUsersLocalUseCase>()
+
 
     private val viewModel by viewModels<ListViewModel> {
         object : ViewModelProvider.Factory {
             @Suppress
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return ListViewModel(
-                    userRepository,
-                    appDatabase.githubCashedDao()
+                    getUsersUseCase,
+                    insertUsersLocalUseCase,
+                    getUsersLocalUseCase
                 ) as T
             }
         }
