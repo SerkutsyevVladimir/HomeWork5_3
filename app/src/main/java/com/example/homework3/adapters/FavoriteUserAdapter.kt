@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework3.databinding.ItemFavoriteUserBinding
-import com.example.homework3.model.GithubFavoriteUser
+import com.example.homework3.domain.model.FavoriteUser
 
 class FavoriteUserAdapter(
     context: Context
-) : ListAdapter<GithubFavoriteUser, RecyclerView.ViewHolder>(DIFF_UTIL) {
+) : ListAdapter<FavoriteUser, RecyclerView.ViewHolder>(DIFF_UTIL) {
 
     private val layoutInflater = LayoutInflater.from(context)
 
@@ -30,23 +30,23 @@ class FavoriteUserAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val userVH = holder as FavoriteUserViewHolder
-        val user = getItem(position) as GithubFavoriteUser
+        val user = getItem(position) as FavoriteUser
         userVH.bind(user)
     }
 
 
     companion object {
-        private val DIFF_UTIL = object : DiffUtil.ItemCallback<GithubFavoriteUser>() {
+        private val DIFF_UTIL = object : DiffUtil.ItemCallback<FavoriteUser>() {
             override fun areItemsTheSame(
-                oldItem: GithubFavoriteUser,
-                newItem: GithubFavoriteUser
+                oldItem: FavoriteUser,
+                newItem: FavoriteUser
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: GithubFavoriteUser,
-                newItem: GithubFavoriteUser
+                oldItem: FavoriteUser,
+                newItem: FavoriteUser
             ): Boolean {
                 return oldItem == newItem
             }

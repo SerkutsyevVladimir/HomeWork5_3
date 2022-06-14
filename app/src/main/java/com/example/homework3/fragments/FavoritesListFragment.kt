@@ -12,35 +12,33 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.homework3.adapters.FavoriteUserAdapter
-import com.example.homework3.database.AppDatabase
 import com.example.homework3.databinding.FragmentFavoritesListBinding
+import com.example.homework3.domain.usecase.GetFavoriteUsersUseCase
 import com.example.homework3.extensions.addSpaceDecoration
-import com.example.homework3.viewmodels.DetailsViewModel
 import com.example.homework3.viewmodels.FavoriteListViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesListFragment : Fragment() {
     private var _binding: FragmentFavoritesListBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
 
-    private val appDatabase by inject<AppDatabase>()
+    private val getFavoriteUsersUseCase by inject<GetFavoriteUsersUseCase>()
 
     private val viewModel by viewModels<FavoriteListViewModel> {
         object : ViewModelProvider.Factory {
             @Suppress
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return FavoriteListViewModel(
-                    appDatabase.githubDao()
+                    getFavoriteUsersUseCase
                 ) as T
             }
         }
     }
 
- //   private val viewModel by viewModel<FavoriteListViewModel>()
+    //   private val viewModel by viewModel<FavoriteListViewModel>()
 
 
     private val adapter by lazy {

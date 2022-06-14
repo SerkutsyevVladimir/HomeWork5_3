@@ -1,40 +1,28 @@
 package com.example.homework3.viewmodels
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.homework3.database.GithubCashedUsersDao
-import com.example.homework3.database.GithubDao
-import com.example.homework3.model.GithubFavoriteUser
-import com.example.homework3.retrofit.GithubUserDetails
-import com.example.homework3.retrofit.UserRepository
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.*
-import java.util.*
+import com.example.homework3.domain.model.FavoriteUser
+import com.example.homework3.domain.model.UserDetails
+import com.example.homework3.domain.usecase.GetUserDetailsUseCase
+import com.example.homework3.domain.usecase.InsertFavoriteUserUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 class DetailsViewModel(
-   // private val username: String,
-    private val userRepository: UserRepository,
-    private val githubDao: GithubDao
+    private val getUserDetailsUseCase: GetUserDetailsUseCase,
+    private val insertFavoriteUserUseCase: InsertFavoriteUserUseCase
 ) : ViewModel() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
-    fun getUserDetails(username: String) : Flow<GithubUserDetails> = flow {
-        emit(userRepository.getUserDetails(username)) }
-
-    fun insertAll (username: GithubFavoriteUser) {
-        scope.launch { githubDao.insertAll(username)}
+    fun getUserDetails(username: String): Flow<UserDetails> = flow {
+        emit(getUserDetailsUseCase(username).getOrThrow())
     }
 
-//    private val loadDetails = flow {
-//        emit(userRepository.getUserDetails(username))
-//    }
-//
-//    val getDetails = loadDetails.shareIn(
-//        scope = viewModelScope,
-//        started = SharingStarted.Eagerly,
-//        replay = 1
-//    )
-
+    fun insertAll(username: FavoriteUser) {
+        scope.launch { insertFavoriteUserUseCase(username) }
+    }
 }

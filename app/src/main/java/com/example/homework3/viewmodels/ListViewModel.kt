@@ -1,15 +1,17 @@
 package com.example.homework3.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.example.homework3.database.GithubCashedUsersDao
-import com.example.homework3.retrofit.Item
-import com.example.homework3.retrofit.UserRepository
+import com.example.homework3.domain.model.Item
+import com.example.homework3.domain.usecase.GetUsersLocalUseCase
+import com.example.homework3.domain.usecase.GetUsersUseCase
+import com.example.homework3.domain.usecase.InsertUsersLocalUseCase
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 
 class ListViewModel(
-    private val userRepository: UserRepository,
-    private val cashedUsersDao: GithubCashedUsersDao
+    private val getUsersUseCase: GetUsersUseCase,
+    private val insertUsersLocalUseCase: InsertUsersLocalUseCase,
+    private val getUsersLocalUseCase: GetUsersLocalUseCase
 ) : ViewModel() {
 
     private val loadStateFlow = MutableSharedFlow<LoadState>(
@@ -27,7 +29,7 @@ class ListViewModel(
         loadStateFlow.tryEmit(LoadState.REFRESH)
     }
 
-    fun getData(): Flow<List<Item.GithubUser>> {
+    fun getData(): Flow<List<Item.User>> {
         return loadStateFlow
             .filter { !isLoading }
             .onEach {
@@ -37,16 +39,16 @@ class ListViewModel(
                 isLoading = true
             }
             .map {
-                userRepository.getUsers(lastId)
+                getUsersUseCase(lastId).getOrDefault(emptyList())
             }
             .onEach {
-                cashedUsersDao.insertAll(it)
+                insertUsersLocalUseCase(it)
                 lastId = it.last().id.toInt()
                 isLoading = false
             }
             .runningReduce { accumulator, value -> accumulator + value }
             .onStart {
-                emit(cashedUsersDao.getAll())
+                emit(getUsersLocalUseCase().getOrDefault(emptyList()))
             }
     }
 

@@ -26,4 +26,7 @@
     <dimen name="item_favorite_user_padding">20dp</dimen>
     <dimen name="item_favorite_user_layuout_hight">100dp</dimen>
     <dimen name="fragment_details_textsize">15sp</dimen>
+    <dimen name="fragment_settings_radio_button_text_size">20sp</dimen>
+    <dimen name="fragment_map_text_size">30sp</dimen>
+    <dimen name="fragment_bottom_navigation_page_container_layout_height">0dp</dimen>
 </resources>
