@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework3.databinding.ItemFavoriteUserBinding
 import com.example.homework3.domain.model.FavoriteUser
-import com.example.homework3.model.GithubFavoriteUser
 
 class FavoriteUserAdapter(
     context: Context

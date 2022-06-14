@@ -40,13 +40,6 @@ class ListViewModel(
             }
             .map {
                 getUsersUseCase(lastId).getOrDefault(emptyList())
-//                    .onSuccess { value: List<Item.User> ->  insertUsersLocalUseCase(value)
-//                    lastId=value.last().id.toInt()
-//                    isLoading = false
-//                        value
-//                    }
-//                    .onFailure { error("Can't get data from Server") }
-
             }
             .onEach {
                 insertUsersLocalUseCase(it)

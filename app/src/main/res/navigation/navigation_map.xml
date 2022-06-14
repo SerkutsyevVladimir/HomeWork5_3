@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/map"
         android:name="com.example.homework3.fragments.MapFragment"
-        tools:layout="@layout/fragment_map">
-    </fragment>
+        tools:layout="@layout/fragment_map"></fragment>
 
 
 </navigation>

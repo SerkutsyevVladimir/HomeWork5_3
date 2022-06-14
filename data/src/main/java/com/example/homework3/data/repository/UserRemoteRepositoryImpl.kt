@@ -7,9 +7,8 @@ import com.example.homework3.domain.model.Item
 import com.example.homework3.domain.model.UserDetails
 import com.example.homework3.domain.repository.UserRemoteRepository
 
-internal class UserRemoteRepositoryImpl(private val githubApi: GithubApi):
-    UserRemoteRepository
-{
+internal class UserRemoteRepositoryImpl(private val githubApi: GithubApi) :
+    UserRemoteRepository {
     override suspend fun getUsers(lastId: Int): Result<List<Item.User>> {
         return runCatching {
             githubApi.getUsers(lastId)

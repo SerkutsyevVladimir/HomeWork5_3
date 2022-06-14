@@ -6,4 +6,13 @@
     <string name="fragment_details_followers_title_text">Followers:</string>
     <string name="fragment_details_following_title_text">Following:</string>
     <string name="fragment_details_button_add_favorites_text">Add to Favorites</string>
+    <string name="bottom_navigation_users_title">Users</string>
+    <string name="bottom_navigation_maps_title">Maps</string>
+    <string name="bottom_navigation_settings_title">Settings</string>
+    <string name="fragment_settings_toolbar_title_text">Application Theme</string>
+    <string name="fragment_settings_button_light_mode_text">Light Mode</string>
+    <string name="fragment_settings_button_dark_mode_text">Dark Mode</string>
+    <string name="fragment_settings_button_system_mode_text">System Mode</string>
+    <string name="fragment_map_toolbar_title_text">Maps</string>
+    <string name="fragment_map_textview_text">Maps coming soon! Stay with us and stay tuned for updates!</string>
 </resources>

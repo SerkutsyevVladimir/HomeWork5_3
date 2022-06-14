@@ -8,7 +8,7 @@ import com.example.homework3.domain.service.NightModeService
 import com.example.homework3.fragments.ListFragment
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity(R.layout.activity_main){
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val nightModeService by inject<NightModeService>()
 

@@ -39,7 +39,7 @@
         android:textSize="@dimen/fragment_details_username_text_size"
         android:padding="@dimen/fragment_details_username_padding"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="?android:textColorPrimary"
         tools:text="some text"/>
 
     <LinearLayout
@@ -78,7 +78,7 @@
             android:textSize="@dimen/fragment_details_followers_text_size"
             android:padding="@dimen/fragment_details_followers_padding"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             tools:text="7532"
             />
 
@@ -90,7 +90,7 @@
             android:textSize="@dimen/fragment_details_following_text_size"
             android:padding="@dimen/fragment_details_following_padding"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             tools:text="5555"
             />
     </LinearLayout>

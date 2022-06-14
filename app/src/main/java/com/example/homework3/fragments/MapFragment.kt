@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.homework3.databinding.FragmentMapBinding
-import com.example.homework3.databinding.FragmentSettingsBinding
 
-class MapFragment: Fragment() {
+class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
 

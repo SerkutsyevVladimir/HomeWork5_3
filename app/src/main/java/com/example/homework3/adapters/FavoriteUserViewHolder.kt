@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homework3.databinding.ItemFavoriteUserBinding
 import com.example.homework3.domain.model.FavoriteUser
 import com.example.homework3.domain.usecase.DeleteFavoriteUserUseCase
-import com.example.homework3.model.GithubFavoriteUser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,12 +18,8 @@ class FavoriteUserViewHolder(
     private val context: Context
 ) : RecyclerView.ViewHolder(binding.root), KoinComponent {
 
-    //private val appDatabase by inject<AppDatabase>()
-    private val deleteFavoriteUserUseCase by inject<DeleteFavoriteUserUseCase>()
 
-//    private val githubDao by lazy {
-//        appDatabase.githubDao()
-//    }
+    private val deleteFavoriteUserUseCase by inject<DeleteFavoriteUserUseCase>()
 
     private val scope =
         CoroutineScope(Dispatchers.Main)
@@ -36,9 +31,9 @@ class FavoriteUserViewHolder(
                 .setTitle("Delete")
                 .setMessage("Are you sure you want to delete this User from Favorites?")
                 .setPositiveButton(android.R.string.ok) { dialog, buttonId ->
-                     scope.launch {
-                    deleteFavoriteUserUseCase(user)
-                      }
+                    scope.launch {
+                        deleteFavoriteUserUseCase(user)
+                    }
                 }
                 .setNegativeButton(android.R.string.cancel, null)
                 .show()

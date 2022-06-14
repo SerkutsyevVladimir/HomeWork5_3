@@ -28,10 +28,6 @@ class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
 
-    //private val userRepository by inject<UserRepository>()
-
-    //private val appDatabase by inject<AppDatabase>()
-
     private val getUserDetailsUseCase by inject<GetUserDetailsUseCase>()
     private val insertFavoriteUserUseCase by inject<InsertFavoriteUserUseCase>()
 
@@ -71,7 +67,7 @@ class DetailsFragment : Fragment() {
             try {
                 var user: UserDetails
                 viewModel.getUserDetails(args.username)
-             //   viewModel2.getDetails
+                    //   viewModel2.getDetails
                     .onEach {
                         user = it
                         with(binding) {
@@ -95,7 +91,6 @@ class DetailsFragment : Fragment() {
                 textView.text?.takeIf { it.isNotEmpty() }
                     ?.let { username ->
                         viewLifecycleOwner.lifecycleScope.launch {
-                          //  viewModel.insertAll(GithubFavoriteUser(githubUsername = username.toString()))
                             viewModel.insertAll(FavoriteUser(username = username.toString()))
                             Toast.makeText(
                                 requireContext(),

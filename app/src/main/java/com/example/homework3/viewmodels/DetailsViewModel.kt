@@ -5,34 +5,24 @@ import com.example.homework3.domain.model.FavoriteUser
 import com.example.homework3.domain.model.UserDetails
 import com.example.homework3.domain.usecase.GetUserDetailsUseCase
 import com.example.homework3.domain.usecase.InsertFavoriteUserUseCase
-import com.example.homework3.model.GithubFavoriteUser
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 class DetailsViewModel(
-   // private val username: String,
     private val getUserDetailsUseCase: GetUserDetailsUseCase,
     private val insertFavoriteUserUseCase: InsertFavoriteUserUseCase
 ) : ViewModel() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
-    fun getUserDetails(username: String) : Flow<UserDetails> = flow {
-        emit(getUserDetailsUseCase(username).getOrThrow()) }
-
-    fun insertAll (username: FavoriteUser) {
-        scope.launch { insertFavoriteUserUseCase(username)}
+    fun getUserDetails(username: String): Flow<UserDetails> = flow {
+        emit(getUserDetailsUseCase(username).getOrThrow())
     }
 
-//    private val loadDetails = flow {
-//        emit(userRepository.getUserDetails(username))
-//    }
-//
-//    val getDetails = loadDetails.shareIn(
-//        scope = viewModelScope,
-//        started = SharingStarted.Eagerly,
-//        replay = 1
-//    )
-
+    fun insertAll(username: FavoriteUser) {
+        scope.launch { insertFavoriteUserUseCase(username) }
+    }
 }

@@ -7,7 +7,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 internal val serviceModule = module {
-    singleOf(::NightModeServiceImpl){
+    singleOf(::NightModeServiceImpl) {
         bind<NightModeService>()
     }
 }

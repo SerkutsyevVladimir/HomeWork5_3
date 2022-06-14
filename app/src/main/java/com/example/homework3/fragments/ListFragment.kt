@@ -16,7 +16,6 @@ import com.example.homework3.R
 import com.example.homework3.adapters.UserAdapter
 import com.example.homework3.databinding.FragmentListBinding
 import com.example.homework3.domain.model.Item
-import com.example.homework3.domain.repository.UserRemoteRepository
 import com.example.homework3.domain.usecase.GetUsersLocalUseCase
 import com.example.homework3.domain.usecase.GetUsersUseCase
 import com.example.homework3.domain.usecase.InsertUsersLocalUseCase
@@ -31,12 +30,8 @@ class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    //private val userRepository by inject<UserRemoteRepository>()
-
-    //private val appDatabase by inject<AppDatabase>()
-
-    private val getUsersUseCase by inject<GetUsersUseCase> ()
-    private val insertUsersLocalUseCase by inject<InsertUsersLocalUseCase> ()
+    private val getUsersUseCase by inject<GetUsersUseCase>()
+    private val insertUsersLocalUseCase by inject<InsertUsersLocalUseCase>()
     private val getUsersLocalUseCase by inject<GetUsersLocalUseCase>()
 
 

@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Application Theme"
-        android:background="@color/teal_200"/>
+        android:background="@color/teal_200"
+        app:title="@string/fragment_settings_toolbar_title_text" />
 
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="?android:attr/dividerHorizontal"
-        android:showDividers="middle"
-        >
+        android:showDividers="middle">
 
         <RadioButton
             android:id="@+id/button_light_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Light Mode"/>
+            android:text="@string/fragment_settings_button_light_mode_text"
+            android:textSize="@dimen/fragment_settings_radio_button_text_size" />
 
         <RadioButton
             android:id="@+id/button_dark_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Dark Mode"/>
+            android:text="@string/fragment_settings_button_dark_mode_text"
+            android:textSize="@dimen/fragment_settings_radio_button_text_size" />
 
         <RadioButton
             android:id="@+id/button_system_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="System Mode"/>
+            android:text="@string/fragment_settings_button_system_mode_text"
+            android:textSize="@dimen/fragment_settings_radio_button_text_size" />
 
     </RadioGroup>
 

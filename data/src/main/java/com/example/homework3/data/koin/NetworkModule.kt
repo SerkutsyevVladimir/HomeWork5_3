@@ -14,7 +14,6 @@ internal val networkModule = module {
             .build()
     }
 
-
     single {
         get<Retrofit>().create<GithubApi>()
     }

@@ -4,8 +4,8 @@
     android:id="@+id/navigation_home.xml"
     app:startDestination="@id/navigation_users">
 
-    <include app:graph="@navigation/navigation_users"/>
-    <include app:graph="@navigation/navigation_map"/>
-    <include app:graph="@navigation/navigation_settings"/>
+    <include app:graph="@navigation/navigation_users" />
+    <include app:graph="@navigation/navigation_map" />
+    <include app:graph="@navigation/navigation_settings" />
 
 </navigation>

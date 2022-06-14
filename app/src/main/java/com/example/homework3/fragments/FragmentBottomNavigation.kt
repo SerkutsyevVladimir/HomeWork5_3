@@ -10,7 +10,7 @@ import com.example.homework3.R
 import androidx.navigation.ui.setupWithNavController
 import com.example.homework3.databinding.FragmentBottomNavigationBinding
 
-class FragmentBottomNavigation: Fragment() {
+class FragmentBottomNavigation : Fragment() {
     private var _binding: FragmentBottomNavigationBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
 

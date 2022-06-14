@@ -25,7 +25,6 @@ class FavoritesListFragment : Fragment() {
     private var _binding: FragmentFavoritesListBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
 
-    //private val appDatabase by inject<AppDatabase>()
     private val getFavoriteUsersUseCase by inject<GetFavoriteUsersUseCase>()
 
     private val viewModel by viewModels<FavoriteListViewModel> {
@@ -39,7 +38,7 @@ class FavoritesListFragment : Fragment() {
         }
     }
 
- //   private val viewModel by viewModel<FavoriteListViewModel>()
+    //   private val viewModel by viewModel<FavoriteListViewModel>()
 
 
     private val adapter by lazy {

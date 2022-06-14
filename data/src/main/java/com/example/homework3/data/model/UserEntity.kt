@@ -5,10 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-internal data class UserEntity (
+internal data class UserEntity(
     @PrimaryKey
     val id: Long,
     val login: String,
     @ColumnInfo
     val avatarUrl: String
-        )
+)

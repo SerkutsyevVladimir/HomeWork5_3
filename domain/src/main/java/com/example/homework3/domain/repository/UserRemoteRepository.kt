@@ -8,5 +8,4 @@ interface UserRemoteRepository {
     suspend fun getUsers(lastId: Int): Result<List<Item.User>>
 
     suspend fun getUserDetails(username: String): Result<UserDetails>
-
 }

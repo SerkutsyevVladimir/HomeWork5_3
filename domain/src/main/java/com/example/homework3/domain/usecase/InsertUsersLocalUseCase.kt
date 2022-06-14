@@ -9,5 +9,4 @@ class InsertUsersLocalUseCase(
     suspend operator fun invoke(user: List<Item.User>) {
         userLocalRepository.insertAll(user)
     }
-
 }

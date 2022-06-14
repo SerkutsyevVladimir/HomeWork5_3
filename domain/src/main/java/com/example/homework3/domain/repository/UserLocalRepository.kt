@@ -11,7 +11,7 @@ interface UserLocalRepository {
 
     suspend fun insertFavorite(username: FavoriteUser)
 
-    suspend fun getAllFavorites() : Result<List<FavoriteUser>>
+    suspend fun getAllFavorites(): Result<List<FavoriteUser>>
 
     suspend fun deleteFavoriteUser(user: FavoriteUser)
 }

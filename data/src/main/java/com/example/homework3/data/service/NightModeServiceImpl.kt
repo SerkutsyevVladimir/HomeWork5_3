@@ -6,11 +6,9 @@ import com.example.homework3.domain.service.NightModeService
 
 internal class NightModeServiceImpl(context: Context) : NightModeService {
 
-    private val sharedPrefs = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE)
-
+    private val sharedPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     override var nightMode: NightMode by enumPref(KEY_NIGHT_MODE, NightMode.SYSTEM)
-
 
     private inline fun <reified E : Enum<E>> enumPref(key: String, defaultValue: E) =
         PrefsDelegate(
@@ -18,7 +16,6 @@ internal class NightModeServiceImpl(context: Context) : NightModeService {
             getValue = { getString(key, null)?.let(::enumValueOf) ?: defaultValue },
             setValue = { putString(key, it.name) }
         )
-
 
     companion object {
         private const val PREFS_NAME = "Github_Preferences"
