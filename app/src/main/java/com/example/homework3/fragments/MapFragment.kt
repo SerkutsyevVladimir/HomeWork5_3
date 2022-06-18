@@ -1,15 +1,23 @@
 package com.example.homework3.fragments
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.homework3.databinding.FragmentMapBinding
 
 class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = requireNotNull(_binding) { "View was destroyed" }
+
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +31,12 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            buttonPermissions.setOnClickListener {
+                permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
     }
 
     override fun onDestroyView() {
