@@ -52,7 +52,6 @@ class ListViewModel(
             }
     }
 
-
 }
 
 enum class LoadState {

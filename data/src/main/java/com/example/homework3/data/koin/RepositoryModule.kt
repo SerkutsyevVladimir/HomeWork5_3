@@ -1,7 +1,10 @@
 package com.example.homework3.data.koin
 
+import android.system.Os.bind
+import com.example.homework3.data.repository.CountryRemoteRepositoryImpl
 import com.example.homework3.data.repository.UserLocalRepositoryImpl
 import com.example.homework3.data.repository.UserRemoteRepositoryImpl
+import com.example.homework3.domain.repository.CountryRemoteRepository
 import com.example.homework3.domain.repository.UserLocalRepository
 import com.example.homework3.domain.repository.UserRemoteRepository
 import org.koin.core.module.dsl.bind
@@ -17,5 +20,9 @@ internal val repositoryModule = module {
     singleOf(::UserLocalRepositoryImpl) {
         bind<UserLocalRepository>()
         named("local")
+    }
+
+    singleOf(::CountryRemoteRepositoryImpl){
+        bind<CountryRemoteRepository>()
     }
 }
