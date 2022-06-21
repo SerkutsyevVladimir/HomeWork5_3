@@ -12,4 +12,5 @@ val useCaseModule = module {
     factoryOf(::GetFavoriteUsersUseCase)
     factoryOf(::InsertFavoriteUserUseCase)
     factoryOf(::DeleteFavoriteUserUseCase)
+    factoryOf(::GetCountriesUseCase)
 }
